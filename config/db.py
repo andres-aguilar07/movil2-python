@@ -6,7 +6,6 @@ app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root@localhost/tasksul'
 app.config['SQLALCHEMY_TRACK_NOTIFICACTIONS'] = False
-
 app.secret_key = "Movil2"
 
 db = SQLAlchemy(app)
