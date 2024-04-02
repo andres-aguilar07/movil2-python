@@ -15,4 +15,20 @@ def alluser():
     respo = usuarios_schema(resultAll)
     return jsonify(respo)
 
+@ruta_user.route("/registrarUsuario", methods=['POST'])
+def registrarUsuario():
+    fullname= request.json['fullname']
+    email = request.json['email']
+    newuser = Users(fullname, email)
+    db.session.add(newuser)
+    db.session.commit()
+    return "Guardado"
+
+@ruta_user.route("eliminarUsuario", methods=['POST'])
+def eliminarUsuario():
+    id = request.json['id'] 
+    usuario = Users.query.get(id)    
+    db.session.delete(usuario)
+    db.session.commit()     
+    return jsonify(usuario_schema.dump(usuario))
 
