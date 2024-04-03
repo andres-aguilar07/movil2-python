@@ -3,8 +3,10 @@ from config.db import app
 
 #trabajar en las rutas de bluprint con respectos a las api's
 from api.UserApi import ruta_user
+from api.CategoryApi import ruta_category
 
 app.blueprints(ruta_user, url_prefix="/api")
+app.blueprints(ruta_category, url_prefix="/api")
 
 #config el servidor
 
