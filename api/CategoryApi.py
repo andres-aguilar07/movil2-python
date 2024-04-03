@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, request, redirect, render_template, jsonify, url_for
+from flask import Flask, Blueprint, flash, request, redirect, render_template, jsonify, url_for
 from config.db import app, db, ma
 
 from models.CategoryModel import Category, CategorySchema
