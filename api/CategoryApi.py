@@ -22,7 +22,7 @@ def addCategory():
     db.session.commit()
     return "Guardado"
 
-@ruta_category.route("/deleteCategory/<id>")
+@ruta_category.route("/deleteCategory/<id>", methods=["DELETE"])
 def deleteCategory(id):        
     categoryBd = Category.query.get(id)        
     db.session.delete(categoryBd)                     
@@ -36,24 +36,6 @@ def updateCategory():
     category.namecategory = request.json['namecategory']                           
     db.session.commit()                        
     return "Actualizado exitosamente"   
-#Vistas para el admin de categorias
-
-@app.route("/admin/categories", methods = ['GET' , 'POST'])
-def admin_categories():
-    if request.method == 'POST': 
-        action = request.form['action']
-        id = int(request.form['id'])
-        if action == 'Delete':
-            flash('La Categoria se ha eliminado correctamente','success')                        
-            return redirect(url_for("admin_categories"))                        
-        elif action == 'Edit': 
-            category = Category.query.filter_by(id=id).first()                        
-            return render_template('forms/admin-categories.html', form=category, action='Editar')                        
-        else: #Add
-            category = Category()             
-    else:                     
-        category = Category.query.order_by(Category.namecategory).all()             
-    return render_template("adminCategories.html", categories=category, action=action)
 
 if __name__ == '__main__':
     app.run(debug=True)     

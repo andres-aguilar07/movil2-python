@@ -9,7 +9,7 @@ ruta_user = Blueprint("route_user", __name__)
 usuario_schema = UsersSchema()
 usuarios_schema = UsersSchema(many=True)
 
-@ruta_user.route("/user")
+@ruta_user.route("/user", methods=["GET"])
 def alluser():
     resultAll = Users.query.all()
     respo = usuarios_schema(resultAll)
@@ -24,7 +24,7 @@ def registrarUsuario():
     db.session.commit()
     return "Guardado"
 
-@ruta_user.route("eliminarUsuario", methods=['POST'])
+@ruta_user.route("eliminarUsuario", methods=['DELETE'])
 def eliminarUsuario():
     id = request.json['id'] 
     usuario = Users.query.get(id)    
