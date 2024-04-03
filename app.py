@@ -5,8 +5,8 @@ from config.db import app
 from api.UserApi import ruta_user
 from api.CategoryApi import ruta_category
 
-app.blueprints(ruta_user, url_prefix="/api")
-app.blueprints(ruta_category, url_prefix="/api")
+app.register_blueprint(ruta_user, url_prefix="/api")
+app.register_blueprint(ruta_category, url_prefix="/api")
 
 #config el servidor
 

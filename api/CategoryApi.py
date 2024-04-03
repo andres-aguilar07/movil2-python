@@ -3,18 +3,18 @@ from config.db import app, db, ma
 
 from models.CategoryModel import Category, CategorySchema
 
-ruta_category= Blueprint("route_user", __name__)
+ruta_category= Blueprint("route_category", __name__)
 
 category_schema = CategorySchema()
 category_schema = CategorySchema(many=True) 
 
-@ruta_category.route("/api/categories" , methods=["GET"])
+@ruta_category.route("/categories" , methods=["GET"])
 def getAllCategories():
     categories = Category.query.all() 
     result = category_schema.dump(categories)
     return jsonify(result)  
 
-@ruta_category.route('/api/addCategory',methods=['POST'])
+@ruta_category.route('/addCategory',methods=['POST'])
 def addCategory():  
     namecategory = request.json['namecategory']
     newcategory = Category(namecategory)
@@ -22,7 +22,7 @@ def addCategory():
     db.session.commit()
     return "Guardado"
 
-@ruta_category.route("/api/deleteCategory/<id>")
+@ruta_category.route("/deleteCategory/<id>")
 def deleteCategory(id):        
     categoryBd = Category.query.get(id)        
     db.session.delete(categoryBd)                     
@@ -54,6 +54,7 @@ def admin_categories():
     else:                     
         category = Category.query.order_by(Category.namecategory).all()             
     return render_template("adminCategories.html", categories=category, action=action)
+
 if __name__ == '__main__':
     app.run(debug=True)     
 

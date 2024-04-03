@@ -1,18 +1,18 @@
-from config.db import bd, app, ma
+from config.db import db, app, ma
 
-class Users(bd.Model):
+class Users(db.Model):
     __tablename__ ='tblusers'
 
-    id = bd.Column(bd.Integer, primary_key = True) 
-    fullname = bd.Column(bd.String(50))
-    email = bd.Column(bd.String(50))
+    id = db.Column(db.Integer, primary_key = True) 
+    fullname = db.Column(db.String(50))
+    email = db.Column(db.String(50))
 
     def __init__(self, fullname, email):
         self.fullname = fullname
         self.email = email
     
 with app.app_context():
-    bd.create_all()
+    db.create_all()
     
 class UsersSchema(ma.Schema):
     class Meta:

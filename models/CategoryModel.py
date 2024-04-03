@@ -1,14 +1,14 @@
-from config.db import bd,app,ma
-class Category(bd.Model):
+from config.db import db,app,ma
+class Category(db.Model):
     __tablename__='tblcategory'
-    id = bd.Column(bd.Integer,primary_key=True)
-    namecategory = bd.Column(bd.String(50))
+    id = db.Column(db.Integer,primary_key=True)
+    namecategory = db.Column(db.String(50))
     
 def __init__(self,namecategory):
     self.namecategory = namecategory
    
 with app.app_context():
-    bd.create_all()
+    db.create_all()
 
 class CategorySchema(ma.Schema):
     class Meta:
