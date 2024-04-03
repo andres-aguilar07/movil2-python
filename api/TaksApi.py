@@ -12,7 +12,7 @@ tareas_schemea = TaksSchema(many=True)
 @ruta_tak.route("/taks")
 def alltak():
     resultAll = Taks.query.all()
-    respo = tareas_schema(resultAll)
+    respo = tareas_schemea(resultAll)
     return jsonify(respo)
 
 
