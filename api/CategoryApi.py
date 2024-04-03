@@ -21,3 +21,18 @@ def addCategory():
     db.session.add(newcategory)
     db.session.commit()
     return "Guardado"
+
+@ruta_category.route("/api/deleteCategory/<id>")
+def deleteCategory(id):        
+    categoryBd = Category.query.get(id)        
+    db.session.delete(categoryBd)                     
+    db.session.commit()    
+    return "Eliminado con exito"
+
+@ruta_category.route("/updateCategory", methods= ["PUT"])
+def updateCategory(): 
+    id = request.json['id']
+    category = Category.query.get(id)       
+    category.namecategory = request.json['namecategory']                           
+    db.session.commit()                        
+    return "Actualizado exitosamente"   
